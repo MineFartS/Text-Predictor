@@ -1,14 +1,13 @@
-from __init__ import cache
-from next import random
+from __init__ import Next
 
 outp = []
 
 while True:
 
     if len(outp) == 0:
-        outp += [cache.random().curr]
-
-    m = random(outp[-1])
+        m = Next.random()
+    else:
+        m = Next.random(outp[-1])
 
     if m is None:
         outp = []
