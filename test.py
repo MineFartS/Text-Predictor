@@ -1,18 +1,22 @@
+from __init__ import cache
 from next import random
 
-outp = ['the']
+outp = []
 
-print(outp[0], end=' ')
+while True:
 
-for _ in range(0, 15):
+    if len(outp) == 0:
+        outp += [cache.random().curr]
 
     m = random(outp[-1])
 
     if m is None:
-        break
+        outp = []
 
-    word = m.replace('.', '')
+    else:
 
-    print(word, end=' ')
-    
-    outp += [word]
+        word = m.replace('.', '')
+
+        print(word, end=' ')
+        
+        outp += [word]
