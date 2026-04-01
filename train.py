@@ -1,10 +1,15 @@
-from __init__ import cache, Fragment
+from __init__ import cache, Fragment, thisd
+from philh_myftp_biz.terminal import KIC
 
 cache.save([])
 
 punct = ['.', '?']
 
-for s in open('train.txt', encoding="latin-1").readlines():
+KIC.enable()
+
+train_txt = thisd.child('train.txt')
+
+for s in train_txt.open().readlines():
 
     words = s.strip().lower().split(' ')
 
@@ -24,5 +29,4 @@ for s in open('train.txt', encoding="latin-1").readlines():
 
         cache += frag
 
-        if len(cache) > 1000:
-            exit()
+        KIC.check()
