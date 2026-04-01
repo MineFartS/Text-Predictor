@@ -1,13 +1,10 @@
-from philh_myftp_biz.pc import Path
-from fragment import Fragment
+from __init__ import cache, Fragment
 
-traintxt = Path('train.txt')
-
-data = {}
+cache.save([])
 
 punct = ['.', '?']
 
-for s in traintxt.open().readlines():
+for s in open('train.txt', encoding="latin-1").readlines():
 
     words = s.strip().split(' ')
 
@@ -23,14 +20,10 @@ for s in traintxt.open().readlines():
         if (word[-1] not in punct) and (len(words) > x+1):
             frag.next = words[x+1]
         
-        """
-        next_word = words[x+1]
-
-        try:
-            data[word][next_word] += 1
-        except KeyError:
-            data[word] = {next_word: 1}
-"""
         print(frag)
 
-       # exit()
+        cache += frag
+
+        if len(cache) > 50:
+            break
+
