@@ -18,12 +18,12 @@ for s in train_txt.open().readlines():
         frag = Fragment()
 
         if words[x-1][-1] not in punct:
-            frag.prev = words[x-1]
+            frag.prev = words[x-1].strip()
 
-        frag.curr = word
+        frag.curr = word.strip()
 
         if (word[-1] not in punct) and (len(words) > x+1):
-            frag.next = words[x+1]
+            frag.next = words[x+1].strip()
         
         print(frag)
 
