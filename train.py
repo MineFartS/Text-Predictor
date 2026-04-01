@@ -6,7 +6,7 @@ punct = ['.', '?']
 
 for s in open('train.txt', encoding="latin-1").readlines():
 
-    words = s.strip().split(' ')
+    words = s.strip().lower().split(' ')
 
     for x, word in enumerate(words):
 
@@ -24,6 +24,5 @@ for s in open('train.txt', encoding="latin-1").readlines():
 
         cache += frag
 
-        if len(cache) > 50:
-            break
-
+        if len(cache) > 1000:
+            exit()

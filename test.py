@@ -1,20 +1,18 @@
-from __init__ import cache
-from random import choice
+from next import random
 
-get_matches = lambda w: [f for f in cache if f.curr==w]
-
-outp = ['The']
+outp = ['the']
 
 print(outp[0], end=' ')
 
 for _ in range(0, 15):
 
-    matches = get_matches(outp[-1])
+    m = random(outp[-1])
 
-    if len(matches) > 0:
+    if m is None:
+        break
 
-        match = choice(matches)
+    word = m.replace('.', '')
 
-        print(match, end=' ')
-        
-        outp += [match.next]
+    print(word, end=' ')
+    
+    outp += [word]
