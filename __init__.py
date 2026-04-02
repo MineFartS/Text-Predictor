@@ -34,20 +34,7 @@ class Word:
         return [w for w in self.line if w.index>self.index]
 
     def __repr__(self) -> str:
-
-        outp = 'Word('
-
-        if len(self.prev) > 0:
-            outp += f'... {self.prev[-1].word}, '
-
-        outp += f'*{self.word}*'
-
-        if len(self.next) > 0:
-            outp += f', {self.next[0].word} ...'
-
-        outp += ')'
-
-        return outp
+        return f'Word({self.word})'
 
     @property
     def instances(self) -> list[Word]:
