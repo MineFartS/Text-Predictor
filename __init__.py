@@ -19,7 +19,7 @@ class Word:
     
     @property
     def word(self) -> str:
-        return self.rline[self.index]
+        return self.rline[self.index].strip(' ().,?\\/\n-:')
     
     @property
     def line(self) -> list[Word]:

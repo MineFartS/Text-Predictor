@@ -26,8 +26,10 @@ for line in train_txt.open().readlines():
             index = x
         )
 
-        print(word)
+        if word.word != '':
+            
+            print(word)
 
-        cache += word
+            cache += word
 
         KIC.check()
