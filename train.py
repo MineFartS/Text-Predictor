@@ -1,18 +1,17 @@
-from __init__ import cache, Word
 from philh_myftp_biz.terminal import KIC
 from philh_myftp_biz.file import temp
-from philh_myftp_biz.web import download
+from philh_myftp_biz.web import URL
+from __init__ import cache, Word
 
 cache.save([])
 
 punct = ['.', '?']
 
-train_txt = temp('train', 'txt')
+train_txt = temp('train', 'txt', '0')
 
-download(
-    url = 'https://media.githubusercontent.com/media/MineFartS/Text-Predictor/refs/heads/master/train.txt',
-    path = train_txt
-)
+train_url = URL('https://media.githubusercontent.com/media/MineFartS/Text-Predictor/refs/heads/master/train.txt')
+
+train_url.cache(train_txt)
 
 KIC.enable()
 
