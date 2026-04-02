@@ -1,21 +1,25 @@
-from __init__ import Next
+from __init__ import cache, Word
+from random import choice
 
-outp = []
+outp: list[Word] = []
 
 while True:
 
     if len(outp) == 0:
-        m = Next.random()
+        _words = cache.read()
     else:
-        m = Next.random(outp[-1])
+        _words = outp[-1].instances
 
-    if m is None:
+    _words = [w for w in _words if len(w.next)>0]
+    
+    if len(_words) == 0:
+
         outp = []
-
+    
     else:
 
-        word = m.replace('.', '')
+        word = choice(choice(_words).next)
 
-        print(word, end=' ')
+        print(word.word.replace('.', ''), end=' ')
         
         outp += [word]

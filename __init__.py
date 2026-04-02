@@ -1,36 +1,56 @@
+from philh_myftp_biz.pc import script_dir
 from philh_myftp_biz.array import List
 from philh_myftp_biz.file import PKL
 from dataclasses import dataclass
-from random import choice
-from philh_myftp_biz.pc import script_dir
+
+#=======================================================
 
 thisd = script_dir()
 
-cache: List[Fragment] = List(PKL(thisd.child('dataset.pkl')))
+cache: List[Word] = List(PKL(thisd.child('dataset.pkl')))
+
+#=======================================================
 
 @dataclass
-class Fragment:
-    prev: None|str = None
-    curr: None|str = None
-    next: None|str = None
-
-class _Next:
+class Word:
+    
+    rline: list[str]
+    index: int
     
     @property
-    def _fragments(self):
-        return [f for f in cache if f.next!=None]
+    def word(self) -> str:
+        return self.rline[self.index]
     
-    def _matches(self, word:str) -> list[Fragment]:
-        return [f for f in self._fragments if f.curr==word]
+    @property
+    def line(self) -> list[Word]:
+        return cache.filtered(lambda w: w.rline==self.rline).read()
 
-    def random(self, word:str=None) -> None | str:
+    @property
+    def prev(self) -> list[Word]:
+        return [w for w in self.line if w.index<self.index]
+    
+    @property
+    def next(self) -> list[Word]:
+        return [w for w in self.line if w.index>self.index]
 
-        if word:
-            matches = self._matches(word)
-        else:
-            matches = self._fragments
+    def __repr__(self) -> str:
 
-        if len(matches) > 0:
-            return choice(matches).next
+        outp = 'Word('
 
-Next = _Next()
+        if len(self.prev) > 0:
+            outp += f'... {self.prev[-1].word}, '
+
+        outp += f'*{self.word}*'
+
+        if len(self.next) > 0:
+            outp += f', {self.next[0].word} ...'
+
+        outp += ')'
+
+        return outp
+
+    @property
+    def instances(self) -> list[Word]:
+        return [f for f in cache if f.word==self.word]
+
+#=======================================================

@@ -1,4 +1,4 @@
-from __init__ import cache, Fragment, thisd
+from __init__ import cache, thisd, Word
 from philh_myftp_biz.terminal import KIC
 
 cache.save([])
@@ -9,24 +9,19 @@ KIC.enable()
 
 train_txt = thisd.child('train.txt')
 
-for s in train_txt.open().readlines():
+for line in train_txt.open().readlines():
 
-    words = s.strip().lower().split(' ')
+    rline: list[str] = [w.strip() for w in line.lower().split(' ')]
 
-    for x, word in enumerate(words):
+    for x, _ in enumerate(rline):
 
-        frag = Fragment()
+        word = Word(
+            rline = rline,
+            index = x
+        )
 
-        if words[x-1][-1] not in punct:
-            frag.prev = words[x-1].strip()
+        print(word)
 
-        frag.curr = word.strip()
-
-        if (word[-1] not in punct) and (len(words) > x+1):
-            frag.next = words[x+1].strip()
-        
-        print(frag)
-
-        cache += frag
+        cache += word
 
         KIC.check()
