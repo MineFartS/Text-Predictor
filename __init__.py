@@ -5,9 +5,9 @@ from dataclasses import dataclass
 
 #=======================================================
 
-thisd = script_dir()
+_cachef = script_dir().child('cache.pkl')
 
-cache: List[Word] = List(PKL(thisd.child('dataset.pkl')))
+cache: List[Word] = List(PKL(_cachef))
 
 #=======================================================
 

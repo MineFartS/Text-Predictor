@@ -1,13 +1,20 @@
-from __init__ import cache, thisd, Word
+from __init__ import cache, Word
 from philh_myftp_biz.terminal import KIC
+from philh_myftp_biz.file import temp
+from philh_myftp_biz.web import download
 
 cache.save([])
 
 punct = ['.', '?']
 
-KIC.enable()
+train_txt = temp('train', 'txt')
 
-train_txt = thisd.child('train.txt')
+download(
+    url = 'https://media.githubusercontent.com/media/MineFartS/Text-Predictor/refs/heads/master/train.txt',
+    path = train_txt
+)
+
+KIC.enable()
 
 for line in train_txt.open().readlines():
 
